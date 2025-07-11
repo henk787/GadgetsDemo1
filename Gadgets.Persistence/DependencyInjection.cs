@@ -8,13 +8,15 @@ namespace Gadgets.Persistence;
 public static class DependencyInjection
 {
 
-    public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration congiguration)
+    public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<GadgetsDbContext>(options =>
         {
             options.UseInMemoryDatabase("GadgetsDb");
-            //For debugging only: options.EnableDetailedErrors(true);
-            //For debugging only: options.EnableSensitiveDataLogging(true);                
+            //For debugging only:
+            options.EnableDetailedErrors(true);
+            //For debugging only:
+            options.EnableSensitiveDataLogging(true);                
         });
 
         return services;

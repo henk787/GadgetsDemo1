@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Gadgets.Domain;
 
 namespace Gadgets.Persistence;
 
-internal class GadgetsDbContext(DbContextOptions<GadgetsDbContext> options ) : DbContext(options)
+public class GadgetsDbContext(DbContextOptions<GadgetsDbContext> options ) : DbContext(options)
 {
+
+    public DbSet<Gadget> Gadgets { get; set; }
 }

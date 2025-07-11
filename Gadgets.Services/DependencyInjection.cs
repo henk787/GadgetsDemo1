@@ -6,10 +6,11 @@ namespace Gadgets.Services;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration congiguration)
+    public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddPersistence(congiguration);
-
+        services.AddPersistence(configuration);
+        services.AddScoped<ServiceInitializer>();
+        
         return services;
     }
 
