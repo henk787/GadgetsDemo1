@@ -1,5 +1,7 @@
+using System;
 using Gadgets.BackOffice.UI.Components;
 using Microsoft.FluentUI.AspNetCore.Components;
+using Gadgets.Services; 
 
 namespace Gadgets.BackOffice.UI
 {
@@ -14,7 +16,11 @@ namespace Gadgets.BackOffice.UI
                 .AddInteractiveServerComponents();
             builder.Services.AddFluentUIComponents();
 
+            builder.Services.AddServices(builder.Configuration);
+
             var app = builder.Build();
+
+            Initializer.InitializeData(app.Services);
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
