@@ -1,0 +1,22 @@
+﻿@page "/gadgets"
+@using Gadgets.Domain
+@attribute [StreamRendering]
+
+<h3>Gadgets - Index</h3>
+
+<FluentDataGrid Id="gagdetsgrid" Items="@gadgets" GridTemplateColumns="1fr 1fr 1fr 2fr" 
+    Loading="@(gadgets == null)" Style="height:204px;" TGridItem="Gadget">
+    <PropertyColumn Title="Date" Property="@(c => c!.Type)" Align="Align.Start" />
+    <PropertyColumn Title="Temp. (C)" Property="@(c => c!.SerialNo)" Align="Align.Start" />        
+</FluentDataGrid>
+
+@code {
+
+    private IQueryable<Gadget>? gadgets;
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+}
