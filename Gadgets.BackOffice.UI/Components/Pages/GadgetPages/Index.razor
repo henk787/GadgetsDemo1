@@ -1,22 +1,26 @@
 ﻿@page "/gadgets"
 @using Gadgets.Domain
+@using Gadgets.Services.Queries
+@inject IScopedMediator ScopedMediator
 @attribute [StreamRendering]
 
 <h3>Gadgets - Index</h3>
 
-<FluentDataGrid Id="gagdetsgrid" Items="@gadgets" GridTemplateColumns="1fr 1fr 1fr 2fr" 
-    Loading="@(gadgets == null)" Style="height:204px;" TGridItem="Gadget">
-    <PropertyColumn Title="Date" Property="@(c => c!.Type)" Align="Align.Start" />
-    <PropertyColumn Title="Temp. (C)" Property="@(c => c!.SerialNo)" Align="Align.Start" />        
-</FluentDataGrid>
+<div class="qgrid">
 
+    <FluentDataGrid Id="gagdetsgrid" Items="@gadgets?.AsQueryable()" GridTemplateColumns="2fr 1fr 3fr"
+                    Loading="@(gadgets == null)" TGridItem="Gadget">
+        <PropertyColumn Title="Type" Property="@(c => c!.Type)" Align="Align.Start" />
+        <PropertyColumn Title="Serial" Property="@(c => c!.SerialNo)" Align="Align.Start" />
+    </FluentDataGrid>
+</div>
 @code {
+    
+    private Gadget[]? gadgets;
 
-    private IQueryable<Gadget>? gadgets;
-
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
-        return base.OnInitializedAsync();
+        gadgets = await ScopedMediator.Send(new GetAllGadgetsQuery());
     }
 
 }

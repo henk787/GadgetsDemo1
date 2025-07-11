@@ -4,8 +4,10 @@ public enum GadgetType
 {    
     Unknown = 0,
     Tricorder,
-
-
+    Hoverboard,
+    Neuralyzer,
+    PortalGun,
+    JetPack
 }
 
 public class Gadget

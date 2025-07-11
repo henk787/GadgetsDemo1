@@ -1,7 +1,7 @@
 using Gadgets.BackOffice.UI.Components;
-using Microsoft.FluentUI.AspNetCore.Components;
-
+using Gadgets.BackOffice.UI.UiServices;
 using Gadgets.Services;
+using Microsoft.FluentUI.AspNetCore.Components;
 
 namespace Gadgets.BackOffice.UI
 {
@@ -12,15 +12,18 @@ namespace Gadgets.BackOffice.UI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddRazorComponents()
+            builder.Services
+                .AddRazorComponents()
                 .AddInteractiveServerComponents();
             builder.Services.AddFluentUIComponents();
 
-
+            // our services
             builder.Services.AddServices(builder.Configuration);
+            builder.Services.AddTransient<IScopedMediator, ScopedMediator>();   
             
             var app = builder.Build();
 
+            // Demo: init Db
             {
                 using var scope = app.Services.CreateScope();
                 var initializer = scope.ServiceProvider.GetRequiredService<ServiceInitializer>();

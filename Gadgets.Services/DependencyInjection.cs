@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Gadgets.Persistence; 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Gadgets.Persistence; 
 
 namespace Gadgets.Services;
 
@@ -10,7 +10,13 @@ public static class DependencyInjection
     {
         services.AddPersistence(configuration);
         services.AddScoped<ServiceInitializer>();
-        
+
+        services.AddMediator(options =>
+        {
+            options.Assemblies = [typeof(DependencyInjection)];
+            options.ServiceLifetime = ServiceLifetime.Scoped;
+        });
+
         return services;
     }
 

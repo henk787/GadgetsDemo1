@@ -189,3 +189,20 @@ code {
         right: unset;
     }
 }
+
+
+.qgrid {
+    height: 60vh;
+    width: 70%;
+    overflow-y:auto;
+
+}
+
+
+.qgrid thead {
+    position: sticky;
+    top: 0;
+    background-color: #d8d8d8;
+    outline: 1px solid gray;
+    z-index: 1;
+}
