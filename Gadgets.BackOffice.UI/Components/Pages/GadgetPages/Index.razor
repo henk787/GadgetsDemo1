@@ -2,6 +2,7 @@
 @using Gadgets.Domain
 @using Gadgets.Services.Queries
 @inject IScopedMediator ScopedMediator
+@inject ILogger<GadgetPages.Index> Logger
 @attribute [StreamRendering]
 
 <h3>Gadgets - Index</h3>
@@ -15,12 +16,15 @@
     </FluentDataGrid>
 </div>
 @code {
-    
+
+
+
     private Gadget[]? gadgets;
 
     protected override async Task OnInitializedAsync()
     {
         gadgets = await ScopedMediator.Send(new GetAllGadgetsQuery());
+        Logger.LogInformation("Gadgets loaded");
     }
 
 }
